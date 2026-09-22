@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shilpa Daniel — CV</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --text: #2C2C2B;
+    --text-muted: #7D7A75;
+    --bg: #FFFFFF;
+    --surface: #F9F8F7;
+    --border: #E6E5E3;
+    --accent: #2783DE;
+    --accent-soft: #E5F2FC;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #fff;
+    padding: 80px 48px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(39,131,222,0.25) 0%, transparent 60%),
+                radial-gradient(circle at 75% 20%, rgba(39,131,222,0.15) 0%, transparent 50%);
+  }
+
+  .hero-content { position: relative; z-index: 1; }
+
+  .avatar {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #5b9dde);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px; font-weight: 700; color: #fff;
+    margin: 0 auto 24px;
+    animation: float 4s ease-in-out infinite;
+    box-shadow: 0 8px 32px rgba(39,131,222,0.4);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .hero h1 {
+    font-size: 2.5rem; font-weight: 700; letter-spacing: -0.5px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero p {
+    margin-top: 8px; font-size: 1rem;
+    color: rgba(255,255,255,0.7);
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+
+  .contact-links {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    margin-top: 24px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .contact-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.875rem;
+    padding: 6px 16px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    transition: all 0.25s ease;
+  }
+
+  .hero-meta {
+    margin-top: 18px;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.58);
+  }
+
+  .section-header {
+    position: sticky;
+    top: 12px;
+    z-index: 5;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 56px 24px 48px; }
+    .hero h1 { font-size: 2rem; }
+    .hero-meta { line-height: 1.7; }
+    .card { padding: 18px; }
+  }
+
+  @media print {
+    body { background: #fff; font-size: 12px; }
+    .hero { padding: 36px 30px; }
+    .container { padding: 28px 20px; }
+    .section { opacity: 1 !important; transform: none !important; }
+    .section-header { position: static; break-after: avoid; }
+    .section-body { max-height: none !important; opacity: 1 !important; padding: 12px 4px 0 !important; }
+    .card, .project-card, .list-item { break-inside: avoid; }
+    .card:hover, .project-card:hover, .list-item:hover { transform: none; box-shadow: none; }
+    .contact-links a { border: 0; padding: 4px 8px; }
+  }
+
+  .contact-links a:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.5);
+    transform: translateY(-2px);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Main layout */
+  .container { max-width: 860px; margin: 0 auto; padding: 48px 24px; }
+
+  /* Sections */
+  .section {
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .section.visible { opacity: 1; transform: translateY(0); }
+
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none;
+    padding: 14px 20px;
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+  }
+  .section-header:hover {
+    background: var(--accent-soft);
+    box-shadow: 0 2px 8px rgba(39,131,222,0.12);
+  }
+
+  .section-icon { font-size: 1.1rem; }
+
+  .section-title {
+    font-size: 1rem; font-weight: 600; flex: 1;
+    color: var(--text);
+  }
+
+  .chevron {
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
+  }
+  .section.open .chevron { transform: rotate(180deg); }
+
+  .section-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+    opacity: 0;
+    padding: 0 4px;
+  }
+  .section.open .section-body {
+    max-height: 1000px;
+    opacity: 1;
+    padding: 16px 4px 0;
+  }
+
+  /* Experience / Education cards */
+  .card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    background: var(--bg);
+    transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+    cursor: default;
+  }
+  .card:hover {
+    box-shadow: 0 4px 20px rgba(39,131,222,0.1);
+    transform: translateX(4px);
+    border-color: var(--accent);
+  }
+
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; }
+  .card-role { font-weight: 600; font-size: 0.975rem; }
+  .card-company { color: var(--accent); font-size: 0.875rem; font-weight: 500; margin-top: 2px; }
+  .card-date { color: var(--text-muted); font-size: 0.8rem; white-space: nowrap; }
+
+  .card ul { margin-top: 12px; padding-left: 18px; }
+  .card ul li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 4px; }
+
+  /* Skills */
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 600px) { .skills-grid { grid-template-columns: 1fr; } }
+
+  .skill-group {
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+  }
+  .skill-group h4 { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 12px; }
+
+  .skill-tag {
+    display: inline-block;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    margin: 3px 3px 3px 0;
+    transition: all 0.2s ease;
+    cursor: default;
+  }
+  .skill-tag:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    transform: scale(1.06);
+  }
+
+  /* Projects */
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    background: var(--bg);
+    transition: all 0.25s ease;
+  }
+  .project-card:hover {
+    box-shadow: 0 6px 24px rgba(39,131,222,0.12);
+    transform: translateY(-3px);
+    border-color: var(--accent);
+  }
+  .project-card h4 { font-weight: 600; font-size: 0.975rem; }
+  .project-card p { font-size: 0.875rem; color: var(--text-muted); margin-top: 6px; }
+  .project-card a { display: inline-block; margin-top: 12px; font-size: 0.825rem; color: var(--accent); text-decoration: none; font-weight: 500; }
+  .project-card a:hover { text-decoration: underline; }
+
+  /* Certs & Languages */
+  .list-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+  .list-item:hover { background: var(--accent-soft); border-color: var(--accent); transform: translateX(4px); }
+  .list-item .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="avatar">SED</div>
+    <h1>Shilpa Elizabeth Daniel</h1>
+    <p>Analyst, Projects and Reporting at KoneCranes</p>
+    <div class="contact-links">
+      <a href="mailto:shilpadaniel1998@gmail.com">✉ Email</a>
+      <a href="https://www.linkedin.com/in/shilpa-elizabeth-daniel-4b67ab216" target="_blank">in LinkedIn</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- About -->
+  <div class="section" id="about">
+    <div class="section-header" onclick="toggle('about')">
+      <span class="section-icon">👤</span>
+      <span class="section-title">About Me</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="card" style="cursor:default">
+        <p style="color:var(--text-muted);font-size:0.9rem">Procurement analyst with experience in spend reporting, supplier payment-term analysis, and Power BI dashboarding across logistics and category functions. Skilled at turning transportation, fuel, and supplier cost data into structured reports and actionable insights for stakeholders. Comfortable working with large datasets, building correlation-based analyses, and communicating findings clearly to business and procurement teams. Looking to bring this analytical and reporting experience to a market intelligence and procurement controlling role.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience -->
+  <div class="section" id="experience">
+    <div class="section-header" onclick="toggle('experience')">
+      <span class="section-icon">💼</span>
+      <span class="section-title">Experience</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <div class="card-role">Analyst, Projects and Reporting</div>
+            <div class="card-company">Konecranes</div>
+          </div>
+          <div class="card-date">Sep 2025 – Present</div>
+        </div>
+        <ul>
+          <li>Created Python-enhanced shipment profiles for accurate pre-RFQ analysis and rate-card preparation.</li>
+          <li>Prepared spend KPI reports and analyzed lead times to identify supply chain improvement opportunities.</li>
+          <li>Maintained logistics dashboards and supported real-time tracking, reporting, and operational analysis.</li>
+          <li>Collected, consolidated, and validated quarterly supplier emission reports for consistency.</li>
+          <li>Supported the e-Freight tender tool by increasing Road rate coverage and strengthening logistics data visibility.</li>
+          <li>Expanded core procurement and logistics knowledge through project and category-focused analysis.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <div class="card-role">Category Analyst</div>
+            <div class="card-company">Konecranes</div>
+          </div>
+          <div class="card-date">Apr 2024 – Sep 2025</div>
+        </div>
+        <ul>
+          <li>Delivered €300K in working-capital improvement through logistics payment-term optimization.</li>
+          <li>Analyzed transportation times and supplier pricing to improve performance tracking and RFQ decisions.</li>
+          <li>Developed quarterly business reporting and monthly KPI insights for management reviews.</li>
+          <li>Maintained Power BI fleet dashboards covering fuel costs, lease costs, and fleet activity status.</li>
+          <li>Supported taxonomy accuracy, supplier Code of Conduct coverage, and cross-functional stakeholder requirements.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <div class="card-role">Management Trainee</div>
+            <div class="card-company">Konecranes</div>
+          </div>
+          <div class="card-date">Jun 2023 – Apr 2024</div>
+        </div>
+        <ul>
+          <li>Developed Fact Packs and Category Director Packs to support data-backed business decisions.</li>
+          <li>Conducted payment-term analysis to support cash-flow optimization.</li>
+          <li>Enhanced fleet visibility through an interactive Power BI dashboard.</li>
+          <li>Strengthened stakeholder collaboration through proactive data and reporting support.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div class="section" id="education">
+    <div class="section-header" onclick="toggle('education')">
+      <span class="section-icon">🎓</span>
+      <span class="section-title">Education</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <div class="card-role">Master of Business Administration (MBA) – Operations &amp; Marketing</div>
+            <div class="card-company">TKM Institute of Management, Karuvelil, Kollam</div>
+          </div>
+          <div class="card-date">Nov 2021 – Jun 2024</div>
+        </div>
+        <ul>
+          <li>Built a strong foundation in business strategy, process optimization, and market dynamics through academics and internships.</li>
+          <li>Recognized as Best Performer and Gold Medalist during the MBA program; actively contributed to events, seminars, and inter-college competitions.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-top">
+          <div>
+            <div class="card-role">Bachelor’s Degree – Physics</div>
+            <div class="card-company">St. Thomas College, Kozhencherry</div>
+          </div>
+          <div class="card-date">Jun 2016 – Mar 2019</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills -->
+  <div class="section" id="skills">
+    <div class="section-header" onclick="toggle('skills')">
+      <span class="section-icon">⚡</span>
+      <span class="section-title">Skills</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h4>Technical</h4>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Excel</span>
+          <span class="skill-tag">Data Analysis</span>
+          <span class="skill-tag">Spend Reporting</span>
+          <span class="skill-tag">Market Intelligence</span>
+          <span class="skill-tag">SAP (basic)</span>
+        </div>
+        <div class="skill-group">
+          <h4>Tools</h4>
+          <span class="skill-tag">PowerPoint</span>
+          <span class="skill-tag">AI Tools</span>
+          <span class="skill-tag">Notion</span>
+          <span class="skill-tag">Canva</span>
+        </div>
+        <div class="skill-group">
+          <h4>Soft Skills</h4>
+          <span class="skill-tag">Stakeholder Management</span>
+          <span class="skill-tag">Business Communication</span>
+          <span class="skill-tag">Presentation Skills</span>
+          <span class="skill-tag">Analytical Thinking</span>
+          <span class="skill-tag">Problem Solving</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <div class="section" id="projects">
+    <div class="section-header" onclick="toggle('projects')">
+      <span class="section-icon">🚀</span>
+      <span class="section-title">Projects</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="project-card">
+        <h4>Python-Enhanced Shipment &amp; Rate-Card Analysis</h4>
+        <p>Built shipment profiles and applied Python-based data enhancement and analysis to improve pre-RFQ data quality, sourcing visibility, and rate-card preparation.</p>
+      </div>
+      <div class="project-card">
+        <h4>Power BI Fleet &amp; Logistics Reporting</h4>
+        <p>Maintained and enhanced dashboards covering fleet activity, fuel costs, lease costs, spend KPIs, and logistics performance for stakeholder decision-making.</p>
+      </div>
+      <div class="project-card">
+        <h4>Logistics Payment-Term &amp; Performance Analysis</h4>
+        <p>Analyzed supplier payment terms and transportation performance, contributing to €300K working-capital improvement and stronger supplier performance tracking.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Certifications -->
+  <div class="section" id="certs">
+    <div class="section-header" onclick="toggle('certs')">
+      <span class="section-icon">🏆</span>
+      <span class="section-title">Certifications & Awards</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="list-item"><div class="dot"></div> Special Achievement Award · Konecranes · 2025</div>
+      <div class="list-item"><div class="dot"></div> Special Achievement Award · Konecranes · 2024</div>
+      <div class="list-item"><div class="dot"></div> Rising Star Award · Konecranes · 2023</div>
+      <div class="list-item"><div class="dot"></div> Employee Spotlight · Konecranes · 2 recognitions</div>
+      <div class="list-item"><div class="dot"></div> Gold Medalist &amp; Best Performer · MBA Program</div>
+      <div class="list-item"><div class="dot"></div> Yellow Belt Training · Certified</div>
+      <div class="list-item"><div class="dot"></div> Business Presentation Training · Certified</div>
+    </div>
+  </div>
+
+  <!-- Languages -->
+  <div class="section" id="languages">
+    <div class="section-header" onclick="toggle('languages')">
+      <span class="section-icon">🌍</span>
+      <span class="section-title">Languages</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="list-item"><div class="dot"></div> English · Fluent</div>
+      <div class="list-item"><div class="dot"></div> Malayalam · Fluent</div>
+      <div class="list-item"><div class="dot"></div> Tamil · Working Proficiency</div>
+      <div class="list-item"><div class="dot"></div> Hindi · Working Proficiency</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Toggle sections
+  function toggle(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('open');
+  }
+
+  // Scroll-triggered entrance animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+  // Open all sections initially so the CV reads naturally on first load.
+  document.querySelectorAll('.section').forEach((s, i) => {
+    s.classList.add('open');
+    s.style.transitionDelay = (i * 0.08) + 's';
+  });
+</script>
+</body>
+</html>
